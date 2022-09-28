@@ -20,7 +20,6 @@ SselecT.addEventListener("change",function(e){
             ele.city.forEach((fetchcity)=>{
                 _city = `<option class="stateOpt" value=${fetchcity}>${fetchcity}</option>`;
                 CselecT.innerHTML += _city;
-
             });
         }
     })
