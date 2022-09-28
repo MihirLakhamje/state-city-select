@@ -8,17 +8,20 @@ const Select = '{"state":[{"stateName":"Maharastra","city":["Mumbai","Beed","Kai
 const values = JSON.parse(Select);
 
 values["state"].forEach((fetchstate, stateIndex) => {
-    console.log(fetchstate, stateIndex);
-    
     _state = `<option class="stateOpt" value=${fetchstate.stateName}>${fetchstate.stateName}</option>`;
     SselecT.innerHTML += _state;
-    if(this[this.selectedIndex]){
-        console.log(fetchstate.city)
-        
-    }
 });
 
 SselecT.addEventListener("change",function(e){
     console.log(this[this.selectedIndex].text);
-    
+    values.state.forEach((ele, i)=>{
+        if(this[this.selectedIndex].text == ele.stateName){
+            console.log(ele.city);
+            ele.city.forEach((fetchcity)=>{
+                _city = `<option class="stateOpt" value=${fetchcity}>${fetchcity}</option>`;
+                CselecT.innerHTML += _city;
+
+            });
+        }
+    })
 });
