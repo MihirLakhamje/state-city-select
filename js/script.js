@@ -1,42 +1,32 @@
 // Initialize variables
+let stateKey,cityValue;
 let _state, _city;
+let onSelectState;
 let stateOpt = document.querySelector(".stateOpt")
-let cityOpt = document.querySelector(".cityOpt")
+let cityOpt = document.getElementsByClassName(".cityOpt")
 let SselecT = document.getElementById("state");
 let CselecT = document.getElementById("city");
 
 // JSON
-const Select = '{"state":[{"stateName":"Maharastra","city":["Mumbai","Beed","Kaij"]},{"stateName":"Rajasthan","city":["Bambir","rajasthan state 1","rajasthan state 2"]}]}';
+const Select = '{"Maharastra":["Mumbai","Beed","Kaij"], "Rajasthan":["Jodhpur","Jaipur","Udaipur"]}';
 
 // Convert into object
-const values = JSON.parse(Select);
-
+const jsonData = JSON.parse(Select);
 // Fetching all states and displaying in option tag
-values["state"].forEach((fetchstate) => {
-values["state"].forEach((fetchstate, stateIndex) => {
-    console.log(fetchstate, stateIndex);
-    _state = `<option class="stateOpt" value=${fetchstate.stateName}>${fetchstate.stateName}</option>`;
+for(stateKey in jsonData){
+    console.log(stateKey)
+    _state = `<option class="stateOpt value="${stateKey}">${stateKey}</option>`;
     SselecT.innerHTML += _state;
-    if(this[this.selectedIndex]){
-        console.log(fetchstate.city)
-        
+}
+
+SselecT.addEventListener("change",function(e){
+    onSelectState = this[this.selectedIndex].text;
+    for(stateKey in jsonData){
+        if(onSelectState === stateKey){
+            _city = `<option class="cityOpt value="${stateKey}">${stateKey}</option>`;
+            CselecT.innerHTML += _city;
+        }
     }
 });
 
 // on every change 
-SselecT.addEventListener("change",function(e){
-
-    // Fetch state
-    values.state.forEach((ele, i)=>{
-
-        // whether selected option match or not
-        if(this[this.selectedIndex].text === ele.stateName){
-
-            // Fetch city and display in option tag
-            ele.city.forEach((fetchcity)=>{
-                _city = `<option class="stateOpt" value=${fetchcity}>${fetchcity}</option>`;
-                CselecT.innerHTML += _city;
-            });
-        }
-    })
-});
